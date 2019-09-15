@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['local.test.com', '127.0.0.1', 'localhost']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -72,57 +71,7 @@ TEMPLATES = [
 ]
 
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.google.GoogleOpenId',
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-LOGIN_URL = 'index'
-LOGIN_REDIRECT_URL = 'index'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='365492865331-fmdquk9hva0f9ugfu7kvm1ctqkk27ds4.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xDYNaVsvTubyoRKtWTlDuCuy'
-
-SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.auth_allowed',
-    'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.social_auth.associate_by_email',
-    'social_core.pipeline.user.create_user',
-    'social_core.pipeline.social_auth.associate_user',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',
-)
-
-AUTH_USER_MODEL = 'google.User'
-
-GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
-    'approval_prompt': 'force'
-}
-
-
-# SOCIAL_AUTH_DISCONNECT_PIPELINE = (
-#     # Verifies that the social association can be disconnected from the current
-#     # user (ensure that the user login mechanism is not compromised by this
-#     # disconnection).
-#     'social_core.pipeline.disconnect.allowed_to_disconnect',
-
-#     # Collects the social associations to disconnect.
-#     'social_core.pipeline.disconnect.get_entries',
-
-#     # Revoke any access_token when possible.
-#     'social_core.pipeline.disconnect.revoke_tokens',
-
-#     # Removes the social associations.
-#     'social_core.pipeline.disconnect.disconnect',
-# )
-
 WSGI_APPLICATION = 'integrationsite.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -168,11 +117,42 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
+
+# Google OAuth
+
 AUTH_USER_MODEL = 'google.User'
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = 'index'
+LOGIN_REDIRECT_URL = 'index'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='365492865331-fmdquk9hva0f9ugfu7kvm1ctqkk27ds4.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xDYNaVsvTubyoRKtWTlDuCuy'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
+    'approval_prompt': 'force'
+}
