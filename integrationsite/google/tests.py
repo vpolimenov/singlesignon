@@ -19,7 +19,7 @@ class Login(TestCase):
         logged_in = self.client.login(username='testuser', password='12345')
         assert logged_in == True
 
-    def test_social_oauth(self):
+    def test_social_oauth_old_token(self):
         dummy_access_code = 'ya29.GluEB1bXg3VVZ-VZvUyZ4FxuIwFAoGi988kWAh6drYcxeOZfcwhA0fEy80SJsMIPsWaXmu1nY0j-2bDdVO20ynn7CXVNI6NSFLhvnTRv_32KMkUJEtKwFehNkvWA'
         user_info = requests.get(
             f"https://people.googleapis.com/v1/people/me",
@@ -28,13 +28,8 @@ class Login(TestCase):
                 'personFields': 'birthdays,biographies,addresses'
             }
         ).json()
+        assert user_info['error']['status'] == 'UNAUTHENTICATED'
 
-        # user = User.objects.create(username='testuser', password='1234')
-
-        # self.client.force_login(user, "django.contrib.auth.backends.ModelBackend")
-
-        # response = self.client.get(reverse("social:begin"))
-
-        # import pdb;pdb.set_trace()
-
+    def test_social_oauth_working(self):
         raise NotImplementedError
+
