@@ -1,2 +1,4 @@
 ve
 *.pyc
+*/db.sqlite3
+.vscode
