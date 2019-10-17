@@ -33,9 +33,13 @@
             <div class="col-12 text-center">
                 <h1 class="font-weight-light">Wazoku Integrations</h1>
                 {% if not logged_in %}
-                  <a href="#" class="btn btn-info" role="button">Login with Google</a>
+                  <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-info" role="button">Login with Google</a>
                 {% else %}
-                  <p>You are logged in</p>
+                  <p>You are logged in as {{ username }}</p>
+                  <p>Birth date: {{ birth_date }}</p>
+                  <p>Biography: {{ biography }}</p>
+                  <p>Location: {{ location }}</p>
+                  <a href="{% url 'logout' %}" class="btn btn-info" role="button">Logout</a>
                 {% endif %}
             </div>
           </div>
