@@ -1,4 +1,4 @@
-django==2.2.3
+django==2.2.8
 requests
 oauth2client==4.1.3
 social-auth-app-django==3.1.0
